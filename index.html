@@ -3,9 +3,30 @@
 <head>
 	<meta charset="utf-8">
 	<script>
-		// TODO: create a handler
+	function setSearchEngine() {
+		console.log("Good job");
+	};
     window.addEventListener("load", function(){
-        // TODO: register the handler
+		let form = document.getElementById("searchForm");
+		console.log(form);
+        form.addEventListener("submit", function(event) {
+			let engine = document.querySelector("input[name=engine]:checked");
+			let q = document.querySelector("input[name=q]");
+			//let engine = document.getElementById("input[name=engine]");
+			console.log(engine.value);
+			let actions = {
+				"Google": "https://www.google.com/search",
+				"DuckDuckGo": "https://duckduckgo.com/",
+				"Bing": "https://www.bing.com/search",
+				"Ask": "https://www.ask.com/web"
+			};
+			let actionURL = actions[engine.value];
+			console.log(actionURL);
+			if (q.value === "" || engine.value === "") {
+            alert("All fields are required!");
+			}
+			form.setAttribute("action", actionURL);
+		});
     });
 	</script>
 </head>
@@ -13,7 +34,14 @@
 <body>
 
 	<form id="searchForm">
-    <!-- TODO: add form elements -->
+		<label><input type="text" name="q"/></label>
+
+		<label>Google<input type="radio" name="engine" value="Google"/></label>
+		<label>DuckDuckGo<input type="radio" name="engine" value="DuckDuckGo"/></label>
+      	<label>Bing<input type="radio" name="engine" value="Bing"/></label>
+      	<label>Ask<input type="radio" name="engine" value="Ask"/></label> 
+      	
+		<input type="submit" value="Go!"/>
 	</form>
 
 </body>
